@@ -118,10 +118,10 @@ class SharedFileCache
 
 
 	/**
-	 * Generates content if necessary and returns its full filename (with path).
+	 * Generates content if necessary and returns its lock
 	 *
 	 * @param mixed
-	 * @return string
+	 * @return \Rixxi\SharedFileCache\SharedFileLock
 	 */
 	public function getGeneratedFilename($value)
 	{
@@ -152,7 +152,7 @@ class SharedFileCache
 			}
 			flock($handle, LOCK_SH);
 		}
-		return $file;
+		return new SharedFileLock($file, $handle);
 	}
 
 }
